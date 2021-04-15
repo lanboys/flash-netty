@@ -1,5 +1,9 @@
 package the.flash.client;
 
+import java.util.Date;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -15,10 +19,6 @@ import the.flash.codec.PacketEncoder;
 import the.flash.codec.Spliter;
 import the.flash.protocol.request.MessageRequestPacket;
 import the.flash.util.LoginUtil;
-
-import java.util.Date;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author 闪电侠
@@ -82,7 +82,7 @@ public class NettyClient {
                     Scanner sc = new Scanner(System.in);
                     String line = sc.nextLine();
 
-                    for (int i = 0; i < 1000; i++) {
+                    for (int i = 0; i < 1; i++) {
                         channel.writeAndFlush(new MessageRequestPacket(line));
                     }
                 }

@@ -1,5 +1,8 @@
 package the.flash.protocol;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.netty.buffer.ByteBuf;
 import the.flash.protocol.request.LoginRequestPacket;
 import the.flash.protocol.request.MessageRequestPacket;
@@ -8,10 +11,10 @@ import the.flash.protocol.response.MessageResponsePacket;
 import the.flash.serialize.Serializer;
 import the.flash.serialize.impl.JSONSerializer;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static the.flash.protocol.command.Command.*;
+import static the.flash.protocol.command.Command.LOGIN_REQUEST;
+import static the.flash.protocol.command.Command.LOGIN_RESPONSE;
+import static the.flash.protocol.command.Command.MESSAGE_REQUEST;
+import static the.flash.protocol.command.Command.MESSAGE_RESPONSE;
 
 public class PacketCodeC {
 
@@ -43,14 +46,15 @@ public class PacketCodeC {
         byteBuf.writeByte(packet.getVersion());
         byteBuf.writeByte(Serializer.DEFAULT.getSerializerAlogrithm());
         byteBuf.writeByte(packet.getCommand());
-        byteBuf.writeInt(bytes.length);
+        //byteBuf.writeInt(bytes.length);
+        byteBuf.writeInt(bytes.length+4);
         byteBuf.writeBytes(bytes);
     }
 
 
     public Packet decode(ByteBuf byteBuf) {
         // 跳过 magic number
-        byteBuf.skipBytes(4);
+        //byteBuf.skipBytes(4);
 
         // 跳过版本号
         byteBuf.skipBytes(1);
@@ -64,7 +68,8 @@ public class PacketCodeC {
         // 数据包长度
         int length = byteBuf.readInt();
 
-        byte[] bytes = new byte[length];
+        byte[] bytes = new byte[length-4];
+        //byte[] bytes = new byte[length];
         byteBuf.readBytes(bytes);
 
         Class<? extends Packet> requestType = getRequestType(command);

@@ -1,18 +1,18 @@
 package the.flash.server;
 
+import java.util.Date;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import the.flash.codec.PacketDecoder;
-import the.flash.codec.PacketEncoder;
-import the.flash.codec.Spliter;
+import the.flash.server.codec.PacketDecoder;
+import the.flash.server.codec.PacketEncoder;
+import the.flash.server.codec.Spliter;
 import the.flash.server.handler.LoginRequestHandler;
 import the.flash.server.handler.MessageRequestHandler;
-
-import java.util.Date;
 
 public class NettyServer {
 

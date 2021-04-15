@@ -10,7 +10,8 @@ public class Spliter extends LengthFieldBasedFrameDecoder {
     private static final int LENGTH_FIELD_LENGTH = 4;
 
     public Spliter() {
-        super(Integer.MAX_VALUE, LENGTH_FIELD_OFFSET, LENGTH_FIELD_LENGTH);
+        //super(Integer.MAX_VALUE, LENGTH_FIELD_OFFSET, LENGTH_FIELD_LENGTH);
+        super(Integer.MAX_VALUE, LENGTH_FIELD_OFFSET, LENGTH_FIELD_LENGTH, -4, 4);
     }
 
     @Override
